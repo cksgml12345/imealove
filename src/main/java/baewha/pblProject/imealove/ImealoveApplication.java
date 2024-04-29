@@ -1,4 +1,4 @@
-package com.baewhaUniversity.imealove;
+package baewha.pblProject.imealove;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
