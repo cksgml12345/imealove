@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/imealove
+    username: root  # MySQL 사용자 이름
+    password: Cksgml0426@  # MySQL 비밀번호
+    driver-class-name: com.mysql.cj.jdbc.Driver # MySQL JDBC 드라이버 클래스 이름
+
+  jpa:
+    hibernate:
+      ddl-auto: update # 애플리케이션 실행 시 테이블을 자동으로 생성 또는 업데이트
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
