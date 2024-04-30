@@ -2,6 +2,8 @@ package baewha.pblProject.imealove.domain.controller;
 
 import java.util.Map;
 import java.util.Optional;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import baewha.pblProject.imealove.domain.dto.LoginRequestDto;
 import baewha.pblProject.imealove.domain.service.UserService;
 import baewha.pblProject.imealove.domain.domain.User;
 
@@ -30,10 +33,13 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody Map<String, String> user) {
-		Optional<User> foundUser = userService.login(user.get("username"), user.get("password"));
+	public ResponseEntity<?> login(@RequestBody LoginRequestDto loginRequest, HttpServletRequest request) {
+		Optional<User> foundUser = userService.login(loginRequest.getUsername(), loginRequest.getPassword(), request);
 
 		if (foundUser.isPresent()) {
+			HttpSession session = request.getSession();
+			session.setAttribute("user", foundUser.get());
+
 			return ResponseEntity.ok(foundUser.get());
 		} else {
 			return ResponseEntity.badRequest().body("Invalid username or password.");
@@ -41,8 +47,11 @@ public class UserController {
 	}
 
 	@PostMapping("/logout")
-	public ResponseEntity<String> logout() {
-		userService.logout();
-		return ResponseEntity.ok("성공적으로 로그아웃되었습니다.");
+	public ResponseEntity<String> logout(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			session.invalidate();
+		}
+		return ResponseEntity.ok("Successfully logged out.");
 	}
 }

@@ -1,4 +1,4 @@
-package baewha.pblProject.imealove.Security;
+package baewha.pblProject.imealove.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
