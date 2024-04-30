@@ -39,4 +39,10 @@ public class UserController {
 			return ResponseEntity.badRequest().body("Invalid username or password.");
 		}
 	}
+
+	@PostMapping("/logout")
+	public ResponseEntity<String> logout() {
+		userService.logout();
+		return ResponseEntity.ok("성공적으로 로그아웃되었습니다.");
+	}
 }

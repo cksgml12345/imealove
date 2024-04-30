@@ -2,6 +2,7 @@ package baewha.pblProject.imealove.domain.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import baewha.pblProject.imealove.domain.repository.UserRepository;
@@ -28,5 +29,10 @@ public class UserService {
 	public Optional<User> login(String username, String password) {
 		return userRepository.findByUsername(username)
 			.filter(user -> user.getPassword().equals(password));
+	}
+
+	public void logout() {
+		// 현재 세션을 무효화함
+		SecurityContextHolder.clearContext();
 	}
 }
