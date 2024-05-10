@@ -1,6 +1,9 @@
 spring:
+  jwt:
+    secret: 4aa4a7a5fbe14193899eba15cab361d580ccdca50405a2ce0eeca71b7148076d
+
   datasource:
-    url: jdbc:mysql://localhost:3306/imealove
+    url: jdbc:mysql://localhost:3306/imealove?serverTimezone=Asia/Seoul
     username: root  # MySQL 사용자 이름
     password: Cksgml0426@  # MySQL 비밀번호
     driver-class-name: com.mysql.cj.jdbc.Driver # MySQL JDBC 드라이버 클래스 이름
@@ -8,6 +11,4 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
